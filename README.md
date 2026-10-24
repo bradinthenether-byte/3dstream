@@ -23,15 +23,15 @@ run:
 ./gradlew :app:assembleDebug
 ```
 
-The APK is written to `app/build/outputs/apk/debug/Mupen64PlusAE-debug.apk`.
+The APK is written to `app/build/outputs/apk/debug/app-debug.apk`.
 The app's debug package ID has a `.debug` suffix. Alternatively, open this
 directory in Android Studio and run the `app` configuration on an Android
 device.
 
 After the source is pushed to GitHub, the **Mupen64Plus-AE** workflow builds
 the APK. Open the repository's **Actions** tab, select a successful workflow
-run, and download the `mupen64plus-ae-debug-*` artifact. GitHub downloads the
-artifact as a ZIP; extract it to get `Mupen64PlusAE-debug.apk`. Artifacts are
+run, and download the `Mupen64Plus-AE-debug-*` artifact. GitHub downloads the
+artifact as a ZIP; extract it to get `app-debug.apk`. Artifacts are
 retained for 14 days.
 
 ## Use
