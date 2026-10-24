@@ -1,6 +1,9 @@
 name: Mupen64Plus-AE
 
-on: [push, pull_request]
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
 
 jobs:
   build:
@@ -8,9 +11,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: android-actions/setup-android@v3
+    - name: Set up Android SDK
+      uses: android-actions/setup-android@v3
       with:
-        cmdline-tools-version: 9477386
+        packages: platform-tools
 
     - uses: actions/setup-java@v4
       with:
@@ -74,6 +78,15 @@ jobs:
       with:
         name: mupen64plus-ae-${{ steps.var.outputs.branch }}-${{ env.SHA }}
         path: ${{ github.workspace }}/app/build/outputs/apk/release/Mupen64PlusAE-release.apk
+        if-no-files-found: error
+
+    - name: Upload installable debug APK
+      uses: actions/upload-artifact@v4
+      with:
+        name: mupen64plus-ae-debug-${{ github.run_number }}
+        path: ${{ github.workspace }}/app/build/outputs/apk/debug/Mupen64PlusAE-debug.apk
+        if-no-files-found: error
+        retention-days: 14
 
   release:
     name: Release
